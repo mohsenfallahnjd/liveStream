@@ -2,7 +2,6 @@
 	<b-navbar id="navbar" class="navbar">
 		<b-icon-list
 			class="sidebar-btn h3 mb-0 ml-3"
-			variant="secondary"
 			v-b-toggle.sidebar-right
 		/>
 		<router-link :to="{ name: 'Home' }">
@@ -51,6 +50,7 @@ $loginBtn-Clr: #fafafa
 .navbar
 	height: 65px
 	width: 100%
+	position: relative
 	background-color: $navBG
 	-webkit-box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.5)
 	-moz-box-shadow: 0px 5px 8px 0px rgba(0,0,0,0.5)
@@ -63,6 +63,7 @@ $loginBtn-Clr: #fafafa
 		object-fit: cover
 	.sidebar-btn
 		cursor: pointer
+		color: $loginBtn-Clr
 	.login-btn
 		position: absolute
 		margin: 0px 5px
