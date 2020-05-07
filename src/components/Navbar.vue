@@ -48,7 +48,7 @@ $loginBtn-HoverBG: #292a33
 $loginBtn-HoverClr: #d3d6e0
 $loginBtn-Clr: #fafafa
 .navbar
-	height: 65px
+	height: 100%
 	width: 100%
 	position: relative
 	background-color: $navBG
@@ -80,4 +80,6 @@ $loginBtn-Clr: #fafafa
 		&:hover
 			background-color: $loginBtn-HoverBG
 			color: $loginBtn-HoverClr
+		&:focus
+			box-shadow: none !important
 </style>

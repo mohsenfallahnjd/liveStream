@@ -1,0 +1,208 @@
+<template>
+	<div class="streamer">
+		<!-- streamer-title -->
+		<div class="streamer-title">
+			<b-avatar
+				class="streamer-title__avatar"
+				size="37px"
+				:variant="streamer.avatar == '' ? 'light' : 'dark'"
+			>
+				<img
+					v-if="streamer.avatar != ''"
+					class="streamer-title__avatar--img"
+					:src="streamer.avatar"
+					alt="streamer-avatar"
+				/>
+			</b-avatar>
+
+			<span class="streamer-title__username">
+				{{ streamer.userName }}
+			</span>
+			<span class="streamer-title__folowers">
+				{{ streamer.folowers }} دنبال کننده
+			</span>
+			<b-button
+				pill
+				class="streamer-title__donate-btn"
+				:href="streamer.doante_link"
+				target="_blank"
+				rel="noopener"
+			>
+				<span>تزریق انرژی !</span>
+				<b-icon-battery-charging class="mr-2" font-scale="1" />
+			</b-button>
+		</div>
+		<!--  -->
+
+		<!-- stream-details -->
+		<div class="stream-details">
+			<div class="live-details">
+				<b-img
+					class="live-details__cover"
+					:src="live.img"
+					alt="live-cover"
+				/>
+
+				<div class="live-details__header">
+					<div class="live-details__header__description">
+						{{ live.description }}
+					</div>
+					<div class="live-details__header__name">
+						<img
+							class="gamepad-icon"
+							src="../assets/images/gamepad.svg"
+							alt="gamepad-icon"
+						/>
+						{{ live.name }}
+					</div>
+				</div>
+
+				<div class="live-details__statistics">
+					{{ live.statistics.now }} <b-icon-eye /> |
+					{{ live.statistics.total }} بازدید کل
+				</div>
+			</div>
+			<div class="streamer-social">
+				بگوووووز /:
+			</div>
+		</div>
+		<!--  -->
+	</div>
+</template>
+
+<script>
+export default {
+	name: 'Streamer',
+	data: () => ({
+		streamer: {
+			avatar:
+				'https://static.cdn.asset.aparat.com/profile-photo/6183348-m.jpg',
+			userName: 'cigatech',
+			folowers: 69,
+			doante_link: 'https://www.google.com'
+		},
+		live: {
+			img:
+				'https://www.aparat.com/public/public/user_data/tag_image2/5133825_onpattern.png',
+			name: 'Zula',
+			description:
+				'زولا با بچه های سیگاتک ❤️ قرعه کشی وجه نقد بین فالوئرا ❤️',
+			statistics: {
+				now: 135,
+				total: 315.0
+			}
+		}
+	})
+}
+</script>
+
+<style lang="sass" scoped>
+$primaryColor: #212226
+$secondColor: #fafafa
+$userName: #9da1b1
+$folowers: #7F828D
+$gray: #38393D
+$streamerBG: #171819
+$green: #28a745
+$statistics: #c5c5c5
+
+.streamer
+    width: 100%
+    height: 100%
+    background-color: $streamerBG
+    .streamer-title
+        width: 100%
+        height: 55px
+        padding: .3em .8em
+        background-color: $primaryColor
+        border-bottom: 0.1px solid $gray
+        border-top: 0.1px solid $gray
+        text-rendering: optimizeLegibility
+        display: flex
+        align-items: center
+        &__avatar
+            margin-left: 1em
+            &--img
+                width: 100% !important
+                height: 100% !important
+        &__username
+            color: $secondColor
+            letter-spacing: .3px
+            font-weight: 300
+            margin-left: .8em
+        &__folowers
+            color: $folowers
+            font-size: 10px
+            font-weight: 700
+            word-spacing: 1px
+        &__donate-btn
+            margin-right: auto
+            background-color: $green
+            border: 1px solid darken($green,10%)
+            height: 33px
+            width: auto !important
+            display: flex
+            align-items: center
+            padding: 5px 15px
+            > span
+                color: $secondColor
+                font-size: 12px
+            &:hover
+                background-color: darken($green,10%)
+            &:active
+                background-color: darken($green,20%) !important
+                border-color: darken($green,20%) !important
+            &:focus
+                box-shadow: none !important
+    .stream-details
+        width: 100%
+        padding: 1em
+        .live-details
+            width: 100%
+            height: 69px
+            border-bottom: 0.1px solid $gray
+            padding-bottom: .7em
+            display: flex
+            align-items: center
+            &__cover
+                width: 45px
+                height: auto !important
+                object-fit: cover
+            &__header
+                display: flex
+                flex-direction: column
+                width: 70%
+                text-align: right
+                padding: 0 .8em
+                &__description
+                    color: $secondColor
+                &__name
+                    color: $folowers
+                    font-size: 13px
+                    margin-top: .5em
+                    display: flex
+                    align-items: center
+                    .gamepad-icon
+                        fill: $folowers
+                        width: 12px
+                        height: 12px
+                        margin-left: .3em
+                        margin-bottom: 0.2em
+                        filter: invert(57%) sepia(6%) saturate(576%) hue-rotate(190deg) brightness(89%) contrast(88%)
+            &__statistics
+                width: 30%
+                height: 100%
+                text-align: top
+                color: $statistics
+                font-weight: 500
+                font-size: 14px
+        .streamer-social
+            width: 100%
+            height: calc( 720px - 160px )
+            text-align: center
+            color: $secondColor
+            font-size: 50px
+            font-weight: 500
+            padding-top: 200px
+            vertical-align: middle
+</style>

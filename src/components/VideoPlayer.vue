@@ -3,7 +3,8 @@
 		<video
 			id="my-video"
 			class="video-js"
-			controls
+			controls="false"
+			vjs-fluid
 			preload="auto"
 			poster="https://static.cdn.asset.aparat.com/agf/liveCover-86332-326456-l.jpg"
 			data-setup="{}"
@@ -30,10 +31,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+
 .video-player
-    width: 100%
-    height: 100%
-    .video-js
-        width: 100%
-        height: 100%
+	width: 100%
+	height: 100%
+	.video-js
+		width: 100%
+		height: 100%
 </style>

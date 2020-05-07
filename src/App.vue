@@ -14,5 +14,6 @@ export default {
 @import url('./assets/css/style.css')
 #app
   width: 100%
+  height: 100vh
   // max-height: 768px
 </style>

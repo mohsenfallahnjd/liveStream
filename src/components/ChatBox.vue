@@ -10,13 +10,13 @@
 			<!-- message item -->
 			<div v-for="(user, index) in users" :key="index" class="message">
 				<b-avatar
-					class="message--avatar"
+					class="message__avatar"
 					size="20px"
 					:variant="user.avatar == '' ? 'light' : 'dark'"
 				>
 					<img
 						v-if="user.avatar != ''"
-						class="message--img"
+						class="message__avatar--img"
 						:src="user.avatar"
 						alt="avatar-img"
 					/>
@@ -61,8 +61,8 @@ $userName: #9da1b1
 
 
 .chat-box
-    width: 350px
-    height: calc( 100vh - 65px )
+    width: 100%
+    height: 100%
     background-color: $primaryColor
     display: flex
     flex-direction: column
@@ -112,11 +112,11 @@ $userName: #9da1b1
             &:hover
                 background-color: $loginBtn-HoverBG
                 border-radius: 5px
-            &--avatar
+            &__avatar
                 margin-left: .3em
-            &--img
-                width: 100% !important
-                height: 100% !important
+                &--img
+                    width: 100% !important
+                    height: 100% !important
             &__username
                 display: inline-block
                 color: $userName
@@ -153,4 +153,6 @@ $userName: #9da1b1
                 line-height: 32.6px
             &:hover
                 opacity: 0.8
+            &:focus
+                box-shadow: none !important
 </style>
