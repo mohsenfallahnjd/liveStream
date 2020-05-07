@@ -20,11 +20,12 @@
     "@vue/cli-plugin-router": "~4.3.0",
     "@vue/cli-service": "~4.3.0",
     "babel-eslint": "^10.1.0",
-    "bootstrap-vue": "^2.13.0",
+    "bootstrap-vue": "^2.13.1",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "node-sass": "^4.14.0",
+    "node-sass": "^4.14.1",
     "sass-loader": "^8.0.2",
+    "video.js": "^7.7.5",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
