@@ -13,24 +13,32 @@
 				اگر حساب کاربری دارید، وارد شوید:
 			</div>
 
-			<input type="email" placeholder="Email" />
-			<input type="password" placeholder="password" />
-			<!-- <b-form id="form" inline>
-				<b-input-group prepend="@" class="mb-2 mr-sm-2 mb-sm-0">
-					<b-input
-						id="inline-form-input-username"
-						placeholder="نام کاربری"
-					></b-input>
-				</b-input-group>
-				<b-button variant="primary">Save</b-button>
-			</b-form> -->
+			<b-form id="form">
+				<b-form-input
+					id="form__email"
+					v-model="login.email"
+					placeholder="ایمیل"
+				></b-form-input>
+				<b-form-input
+					id="form__pass"
+					v-model="login.password"
+					placeholder="رمزعبور"
+				></b-form-input>
+			</b-form>
+            <b-button class="submit-btn" variant="success">ورود</b-button>
 		</div>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'LoginBox'
+	name: 'LoginBox',
+	data: () => ({
+		login: {
+			email: '',
+			password: ''
+		}
+	})
 }
 </script>
 
@@ -53,17 +61,20 @@ $signup-header: #fafafa
         width: 100%
         height: 100px
         color: $signup-header
-        padding: 10px 20px 35px
+        padding: 10px 20px 45px
+        font-size: 12px
         &__header
         &__btn
             color: $signup-bar
             background-color: $signup-header
             border: none
+            display: flex
             align-items: center
             margin-left: 2px
+            height: 30px
             > span
                 font-weight: 800
-                font-size: 15px
+                font-size: 12px
             &:hover
                 color: $signup-header
                 background-color: $signup-bar
@@ -73,7 +84,7 @@ $signup-header: #fafafa
     .login-form
         background-color: $signup-header
         width: 100%
-        height: calc( 100% - 70px )
+        height: calc( 100% - 60px )
         position: absolute
         bottom: 0
         box-shadow: 0px -5px 3px -3px rgba(0,0,0,0.3)
@@ -85,6 +96,18 @@ $signup-header: #fafafa
         &__header
             text-align: right
         #form
-            direction: ltr
-            width: 80%
+            display: flex
+            flex-direction: column
+            justify-content: center
+            align-items: center
+            margin-top: 20px
+            &__email , &__pass
+                margin: 10px 0px
+                width: 70%
+                border-radius: 4px
+                &:focus
+                    box-shadow: none !important
+        .submit-btn
+            width: 30%
+            margin: 20px auto 0px
 </style>

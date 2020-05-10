@@ -6,7 +6,7 @@
 				<b-icon-arrow-left-short />
 			</b-button>
 		</div>
-		<div class="login-comp"><LoginBox class="loginbox-comp" /></div>
+		<div class="loginbox-comp"><LoginBox /></div>
 	</div>
 </template>
 
@@ -57,6 +57,6 @@ $loginBtn-Clr: #000
 		&:focus
 			box-shadow: none !important
 	.loginbox-comp
-		width: 500px
-		height: 400px
+		width: 400px
+		height: 330px
 </style>
