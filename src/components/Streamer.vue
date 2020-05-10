@@ -192,7 +192,6 @@ $statistics: #c5c5c5
             &__statistics
                 width: 30%
                 height: 100%
-                text-align: top
                 color: $statistics
                 font-weight: 500
                 font-size: 14px
@@ -205,4 +204,10 @@ $statistics: #c5c5c5
             font-weight: 500
             padding-top: 200px
             vertical-align: middle
+
+
+    @media only screen and (max-width: 500px)
+        .live-details
+            &__header__description,&__statistics
+                font-size: 12px !important
 </style>
