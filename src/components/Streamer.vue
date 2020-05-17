@@ -63,6 +63,10 @@
 				</div>
 			</div>
 			<div class="streamer-social">
+				<!-- <div id="editor">
+					<textarea :value="input" @input="update"></textarea>
+					<div v-html="compiledMarkdown"></div>
+				</div> -->
 				بگوووووز /:
 			</div>
 		</div>
@@ -92,7 +96,18 @@ export default {
 				total: 315.0
 			}
 		}
+		// input: '# hello'
 	})
+	// computed: {
+	// 	compiledMarkdown: function() {
+	// 		return marked(this.input, { sanitize: true })
+	// 	}
+	// },
+	// methods: {
+	// 	update: _.debounce(function(e) {
+	// 		this.input = e.target.value
+	// 	}, 300)
+	// }
 }
 </script>
 
@@ -210,4 +225,8 @@ $statistics: #c5c5c5
         .live-details
             &__header__description,&__statistics
                 font-size: 12px !important
+    @media only screen and (max-width: 350px)
+        .streamer-title
+            &__folowers
+                display: none
 </style>

@@ -1,32 +1,45 @@
 <template>
 	<div class="video-player">
 		<video
-			id="my-video"
+			id="video"
 			class="video-js"
-			controls="false"
-			vjs-fluid
+			controls
 			preload="auto"
 			poster="https://static.cdn.asset.aparat.com/agf/liveCover-86332-326456-l.jpg"
-			data-setup="{}"
-		>
-			<source src="MY_VIDEO.mp4" type="video/mp4" />
-			<source src="MY_VIDEO.webm" type="video/webm" />
-			<p class="vjs-no-js">
-				To view this video please enable JavaScript, and consider
-				upgrading to a web browser that
-				<a
-					href="https://videojs.com/html5-video-support/"
-					target="_blank"
-					>supports HTML5 video</a
-				>
-			</p>
-		</video>
+			autoplay
+		/>
 	</div>
 </template>
 
 <script>
+import Hls from 'hls.js'
 export default {
-	name: 'VideoPlayer'
+	name: 'VideoPlayer',
+	mounted() {
+		if (Hls.isSupported()) {
+			var video = document.getElementById('video')
+			var hls = new Hls()
+
+			// bind them together
+			hls.attachMedia(video)
+			hls.on(Hls.Events.MEDIA_ATTACHED, function() {
+				console.log('video and hls.js are now bound together !')
+				hls.loadSource(
+					'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
+				)
+				hls.on(Hls.Events.MANIFEST_PARSED, function(event, data) {
+					console.log(
+						'manifest loaded, found ' +
+							data.levels.length +
+							' quality level'
+					)
+					video.onclick = function() {
+						video.play()
+					}
+				})
+			})
+		}
+	}
 }
 </script>
 
@@ -38,4 +51,6 @@ export default {
 	.video-js
 		width: 100%
 		height: 100%
+		&:focus
+			outline: none
 </style>

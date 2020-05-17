@@ -8,7 +8,24 @@
 			<b-img :src="logoImg" alt="navbar-logo" class="navbar__logo" />
 		</router-link>
 
-		<b-button pill class="login-btn" :to="{ name: 'Login' }">
+		<span v-if="token" class="user">
+			<span class="user__username">
+				{{ user.userName }}
+			</span>
+			<b-avatar
+				class="user__avatar"
+				size="35px"
+				:variant="user.avatar == '' ? 'light' : 'dark'"
+			>
+				<img
+					v-if="user.avatar != ''"
+					class="user__avatar--img"
+					:src="user.avatar"
+					alt="user-avatar"
+				/>
+			</b-avatar>
+		</span>
+		<b-button v-else pill class="login-btn" :to="{ name: 'Login' }">
 			<b-icon-person class="ml-1" />
 			<span>
 				ورود یا ثبت نام
@@ -37,7 +54,14 @@
 export default {
 	name: 'Navabr',
 	data: () => ({
-		logoImg: require('../assets/images/icons8-microsoft-stream-2019.svg')
+		logoImg: require('../assets/images/icons8-microsoft-stream-2019.svg'),
+		token: true,
+		// token: localStorage.token,
+		user: {
+			avatar:
+				'https://static.cdn.asset.aparat.com/profile-photo/6183348-m.jpg',
+			userName: 'cigatech'
+		}
 	})
 }
 </script>
@@ -82,4 +106,23 @@ $loginBtn-Clr: #fafafa
 			color: $loginBtn-HoverClr
 		&:focus
 			box-shadow: none !important
+	.user
+		width: auto !important
+		position: absolute
+		margin: 0px 5px
+		left: 20px
+		background-color: $navBG
+		color: $loginBtn-Clr
+		border: none
+		height: 33px
+		display: flex
+		align-items: center
+		&__avatar
+			&--img
+				width: 100% !important
+				height: 100% !important
+		&__username
+			color: $loginBtn-Clr
+			font-weight: 300
+			margin-left: .8em
 </style>

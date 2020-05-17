@@ -1,40 +1,46 @@
 <template>
-	<div class="login-box">
-		<div class="signup-bar">
-			<div class="signup-bar__header">
-				اگر حساب کاربری ندارید، ثبت نام کنید:
+	<div class="signup-box">
+		<div class="login-bar">
+			<div class="login-bar__header">
+				اگر حساب کاربری دارید، وارد شوید:
 			</div>
-			<b-button pill class="signup-bar__btn" :to="{ name: 'Signup' }">
-				<span>ایجاد حساب</span>
+			<b-button pill class="login-bar__btn" :to="{ name: 'Login' }">
+				<span>ورود</span>
 			</b-button>
 		</div>
-		<div class="login-form">
-			<div class="login-form__header">
-				اگر حساب کاربری دارید، وارد شوید:
+		<div class="signup-form">
+			<div class="signup-form__header">
+				اگر حساب کاربری ندارید، ثبت نام کنید:
 			</div>
 
 			<b-form class="form">
 				<b-form-input
+					class="form__username"
+					v-model="Signup.username"
+					placeholder="نام کاربری"
+				></b-form-input>
+				<b-form-input
 					class="form__email"
-					v-model="login.email"
+					v-model="Signup.email"
 					placeholder="ایمیل"
 				></b-form-input>
 				<b-form-input
 					class="form__pass"
-					v-model="login.password"
+					v-model="Signup.password"
 					placeholder="رمزعبور"
 				></b-form-input>
 			</b-form>
-			<b-button class="submit-btn" variant="success">ورود</b-button>
+			<b-button class="submit-btn" variant="success">ایجاد حساب</b-button>
 		</div>
 	</div>
 </template>
 
 <script>
 export default {
-	name: 'LoginBox',
+	name: 'SignupBox',
 	data: () => ({
-		login: {
+		Signup: {
+			username: '',
 			email: '',
 			password: ''
 		}
@@ -46,14 +52,14 @@ export default {
 $signup-bar: #232A42
 $signup-header: #fafafa
 
-.login-box
+.signup-box
     width: 100%
     height: 100%
     box-shadow: 2px 3px 5px 0px rgba(0,0,0,0.75)
     border-radius: 8px
     overflow: hidden
     position: relative
-    .signup-bar
+    .login-bar
         display: flex
         align-items: center
         justify-content: space-between
@@ -81,7 +87,7 @@ $signup-header: #fafafa
                 border: .8px solid  $signup-header
             &:focus
                 box-shadow: none !important
-    .login-form
+    .signup-form
         background-color: $signup-header
         width: 100%
         height: calc( 100% - 60px )
@@ -101,13 +107,13 @@ $signup-header: #fafafa
             justify-content: center
             align-items: center
             margin-top: 20px
-            &__email , &__pass
+            &__username, &__email , &__pass
                 margin: 10px 0px
                 width: 70%
                 border-radius: 4px
                 &:focus
                     box-shadow: none !important
         .submit-btn
-            width: 30%
+            width: 40%
             margin: 20px auto 0px
 </style>

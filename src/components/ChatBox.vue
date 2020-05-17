@@ -2,36 +2,47 @@
 	<div id="chat-box" class="chat-box">
 		<div class="chat-box__header"><p>گفتگوها</p></div>
 
-		<div class="chat-box__body">
+		<div class="chat-box__body" ref="messagebox">
 			<div class="chat-box__body__welcome-box">
 				به اتاق گفتگو خوش آمدید!
 			</div>
 
 			<!-- message item -->
-			<div v-for="(user, index) in users" :key="index" class="message">
+			<div
+				v-for="(message, index) in chatData"
+				:key="index"
+				class="message"
+			>
 				<b-avatar
 					class="message__avatar"
 					size="20px"
-					:variant="user.avatar == '' ? 'light' : 'dark'"
+					:variant="message.avatar == '' ? 'light' : 'dark'"
 				>
 					<img
-						v-if="user.avatar != ''"
+						v-if="message.avatar != ''"
 						class="message__avatar--img"
-						:src="user.avatar"
+						:src="message.avatar"
 						alt="avatar-img"
 					/>
 				</b-avatar>
 
-				<span class="message__username"> {{ user.userName }}: </span>
+				<span class="message__username"> {{ message.userName }}: </span>
 				<div class="message__text">
-					{{ user.text }}
+					{{ message.text }}
 				</div>
 			</div>
 			<!--  -->
 		</div>
 
 		<div class="chat-box__footer">
-			<b-button pill class="login-btn" :to="{ name: 'Login' }">
+			<b-form-input
+				v-if="token"
+				class="chat-input"
+				v-model="chatInput"
+				placeholder="گفتگو کنید..."
+				@keypress.enter="sendMessage"
+			></b-form-input>
+			<b-button v-else pill class="login-btn" :to="{ name: 'Login' }">
 				<b-icon-person class="ml-1" />
 				<span>برای گفتگو وارد شوید</span>
 			</b-button>
@@ -40,12 +51,38 @@
 </template>
 
 <script>
-import users from '../data.json'
+import chatData from '../data.json'
 export default {
 	name: 'ChatBox',
 	data: () => ({
-		users
-	})
+		chatData,
+		token: true,
+		// token: localStorage.token,
+		chatInput: ''
+	}),
+	methods: {
+		sendMessage() {
+			if (this.chatInput != '') {
+				const newMessage = {
+					avatar: '',
+					userName: 'MohsenFallah',
+					text: this.chatInput
+				}
+				this.chatData.push(newMessage)
+				this.chatInput = ''
+			}
+		},
+		scrollToEnd() {
+			const content = this.$refs.messagebox
+			content.scrollTop = content.scrollHeight
+		}
+	},
+	mounted() {
+		this.scrollToEnd()
+	},
+	updated() {
+		this.scrollToEnd()
+	}
 }
 </script>
 
@@ -155,4 +192,14 @@ $userName: #9da1b1
                 opacity: 0.8
             &:focus
                 box-shadow: none !important
+        .chat-input
+            width: 100%
+            padding: .75em 1em
+            background-color: $loginBtn-HoverBG
+            color: $loginBtn-HoverClr
+            font-size: 12px
+            border-radius: 5px
+            border: none
+            &:focus
+                box-shadow: none
 </style>

@@ -73,4 +73,9 @@ $gray: #38393D
 		.videoplayer-comp , .streamer-comp
 			width: calc( 100vw - 50px )
 			right: 0
+	@media only screen and (max-width: 500px)
+		.left-side
+			display: none
+		.videoplayer-comp , .streamer-comp
+			width: 100vw
 </style>

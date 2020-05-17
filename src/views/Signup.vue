@@ -1,27 +1,27 @@
 <template>
-	<div id="login-page" class="login-page">
+	<div id="signup-page" class="signup-page">
 		<b-button pill class="back-btn" :to="{ name: 'Home' }">
 			<span>بازگشت</span>
 			<b-icon-arrow-left-short />
 		</b-button>
-		<div class="loginbox-comp"><LoginBox /></div>
+		<div class="signupbox-comp"><SignupBox /></div>
 	</div>
 </template>
 
 <script>
-import LoginBox from '@/components/LoginBox.vue'
+import SignupBox from '@/components/SignupBox.vue'
 export default {
-	name: 'Login',
+	name: 'Signup',
 	components: {
-		LoginBox
+		SignupBox
 	}
 }
 </script>
 
 <style lang="sass" scoped>
 $bgColor: #fafafa
-$loginBtn-Clr: #000
-.login-page
+$signupBtn-Clr: #000
+.signup-page
 	width: 100%
 	height: 100%
 	overflow: auto
@@ -40,7 +40,7 @@ $loginBtn-Clr: #000
 		margin-bottom: 1em
 		position: relative
 		right: 160px
-		color: $loginBtn-Clr
+		color: $signupBtn-Clr
 		> span
 			margin-left: 3px
 			transition: margin-left .3s ease
@@ -50,12 +50,12 @@ $loginBtn-Clr: #000
 				margin-left: 8px
 		&:focus
 			box-shadow: none !important
-	.loginbox-comp
+	.signupbox-comp
 		width: 400px
-		height: 330px
+		height: 400px
 		margin-bottom: 3em
 	@media only screen and (max-width: 500px)
-		.loginbox-comp
+		.signupbox-comp
 			width: 340px
 			height: 320px
 		.back-btn
