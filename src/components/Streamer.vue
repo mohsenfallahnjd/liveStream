@@ -1,5 +1,5 @@
 <template>
-	<div class="streamer">
+	<div id="streamer" class="streamer">
 		<!-- streamer-title -->
 		<div class="streamer-title">
 			<b-avatar
@@ -62,12 +62,8 @@
 					{{ live.statistics.total }} بازدید کل
 				</div>
 			</div>
-			<div class="streamer-social">
-				<!-- <div id="editor">
-					<textarea :value="input" @input="update"></textarea>
-					<div v-html="compiledMarkdown"></div>
-				</div> -->
-				بگوووووز /:
+			<div v-html="compiledMarkdown" class="streamer-social">
+				<!-- <textarea :value="input" @input="update"></textarea> -->
 			</div>
 		</div>
 		<!--  -->
@@ -75,8 +71,16 @@
 </template>
 
 <script>
+import marked from 'marked'
+// import { liveData } from '../api'
 export default {
 	name: 'Streamer',
+	props: {
+		liveData: {
+			type: Object,
+			required: true
+		}
+	},
 	data: () => ({
 		streamer: {
 			avatar:
@@ -85,29 +89,58 @@ export default {
 			folowers: 69,
 			doante_link: 'https://www.google.com'
 		},
+		// live: {
+		// 	img:
+		// 		'https://www.aparat.com/public/public/user_data/tag_image2/5133825_onpattern.png',
+		// 	name: 'Zula',
+		// 	description:
+		// 		'زولا با بچه های سیگاتک ❤️ قرعه کشی وجه نقد بین فالوئرا ❤️',
+		// 	statistics: {
+		// 		now: 135,
+		// 		total: 315.0
+		// 	}
+		// },
 		live: {
 			img:
 				'https://www.aparat.com/public/public/user_data/tag_image2/5133825_onpattern.png',
 			name: 'Zula',
-			description:
-				'زولا با بچه های سیگاتک ❤️ قرعه کشی وجه نقد بین فالوئرا ❤️',
+			description: '',
 			statistics: {
-				now: 135,
-				total: 315.0
+				now: '',
+				total: ''
 			}
+		},
+		input: ''
+	}),
+	computed: {
+		compiledMarkdown() {
+			return marked(this.input, { sanitize: true })
 		}
-		// input: '# hello'
-	})
-	// computed: {
-	// 	compiledMarkdown: function() {
-	// 		return marked(this.input, { sanitize: true })
-	// 	}
-	// },
+	},
+	created() {
+		setTimeout(() => {
+			this.getData()
+		}, 2000)
+		// liveData.then(response => {
+		// 	this.live.description = response.title
+		// 	this.live.statistics.now = response.current_view
+		// 	this.live.statistics.total = response.total_view
+		// 	this.input = response.markdown
+		// })
+	},
+	methods: {
+		getData() {
+			this.live.description = this.liveData.title
+			this.live.statistics.now = this.liveData.current_view
+			this.live.statistics.total = this.liveData.total_view
+			this.input = this.liveData.markdown
+		}
+	}
 	// methods: {
 	// 	update: _.debounce(function(e) {
 	// 		this.input = e.target.value
 	// 	}, 300)
-	// }
+	// },
 }
 </script>
 
@@ -215,12 +248,10 @@ $statistics: #c5c5c5
             height: calc( 720px - 160px )
             text-align: center
             color: $secondColor
-            font-size: 50px
-            font-weight: 500
-            padding-top: 200px
-            vertical-align: middle
-
-
+        // >>> img
+        //     display: none !important
+        //     max-width: 100% !important
+        //     object-fit: cover !important
     @media only screen and (max-width: 500px)
         .live-details
             &__header__description,&__statistics

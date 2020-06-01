@@ -16,35 +16,59 @@
 			<b-form class="form">
 				<b-form-input
 					class="form__username"
-					v-model="Signup.username"
+					v-model="SignupData.username"
 					placeholder="نام کاربری"
 				></b-form-input>
 				<b-form-input
 					class="form__email"
-					v-model="Signup.email"
+					v-model="SignupData.email"
 					placeholder="ایمیل"
 				></b-form-input>
 				<b-form-input
 					class="form__pass"
-					v-model="Signup.password"
+					v-model="SignupData.password"
 					placeholder="رمزعبور"
 				></b-form-input>
 			</b-form>
-			<b-button class="submit-btn" variant="success">ایجاد حساب</b-button>
+			<b-button @click="Signup" class="submit-btn" variant="success">
+				ایجاد حساب
+			</b-button>
 		</div>
 	</div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
 	name: 'SignupBox',
 	data: () => ({
-		Signup: {
+		SignupData: {
 			username: '',
 			email: '',
 			password: ''
 		}
-	})
+	}),
+	methods: {
+		Signup() {
+			axios
+				.post('http://bstream.guilandev.ir/api/user/auth/register', {
+					name: this.SignupData.username,
+					username: this.SignupData.username,
+					email: this.SignupData.email,
+					password: this.SignupData.password
+				})
+				.then(response => {
+					if (response.data.code == 200) {
+						localStorage.token = response.data.data.token
+						localStorage.name = response.data.data.name
+						this.$router.push({ name: 'Home' })
+					}
+				})
+				.catch(error => {
+					console.log(error)
+				})
+		}
+	}
 }
 </script>
 

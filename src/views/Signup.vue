@@ -14,6 +14,11 @@ export default {
 	name: 'Signup',
 	components: {
 		SignupBox
+	},
+	beforeCreate() {
+		if (localStorage.token) {
+			this.$router.push({ name: 'Home' })
+		}
 	}
 }
 </script>

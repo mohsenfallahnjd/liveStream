@@ -56,8 +56,7 @@ export default {
 	name: 'ChatBox',
 	data: () => ({
 		chatData,
-		token: true,
-		// token: localStorage.token,
+		token: localStorage.token,
 		chatInput: ''
 	}),
 	methods: {
@@ -65,7 +64,7 @@ export default {
 			if (this.chatInput != '') {
 				const newMessage = {
 					avatar: '',
-					userName: 'MohsenFallah',
+					userName: localStorage.name,
 					text: this.chatInput
 				}
 				this.chatData.push(newMessage)

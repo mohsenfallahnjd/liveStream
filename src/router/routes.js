@@ -16,6 +16,12 @@ const routes = [{
         path: '/signup',
         name: 'Signup',
         component: Signup
+    },
+    {
+        path: '/:username/live',
+        name: 'Live',
+        component: Home,
+        props: true
     }
 ]
 

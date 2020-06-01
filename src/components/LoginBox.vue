@@ -16,29 +16,51 @@
 			<b-form class="form">
 				<b-form-input
 					class="form__email"
-					v-model="login.email"
-					placeholder="ایمیل"
+					v-model="loginData.username"
+					placeholder="نام کاربری"
 				></b-form-input>
 				<b-form-input
 					class="form__pass"
-					v-model="login.password"
+					v-model="loginData.password"
 					placeholder="رمزعبور"
 				></b-form-input>
 			</b-form>
-			<b-button class="submit-btn" variant="success">ورود</b-button>
+			<b-button @click="Login" class="submit-btn" variant="success">
+				ورود
+			</b-button>
 		</div>
 	</div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
 	name: 'LoginBox',
 	data: () => ({
-		login: {
-			email: '',
+		loginData: {
+			username: '',
 			password: ''
 		}
-	})
+    }),
+	methods: {
+		Login() {
+			axios
+				.post('http://bstream.guilandev.ir/api/user/auth/login', {
+					username: this.loginData.username,
+					password: this.loginData.password
+				})
+				.then(response => {
+					if (response.data.code == 200) {
+						localStorage.token = response.data.data.token
+						localStorage.name = response.data.data.name
+						this.$router.push({ name: 'Home' })
+					}
+				})
+				.catch(error => {
+					console.log(error)
+				})
+		}
+	}
 }
 </script>
 

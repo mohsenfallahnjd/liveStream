@@ -14,6 +14,11 @@ export default {
 	name: 'Login',
 	components: {
 		LoginBox
+	},
+	beforeCreate() {
+		if (localStorage.token) {
+			this.$router.push({ name: 'Home' })
+		}
 	}
 }
 </script>

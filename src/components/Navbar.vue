@@ -34,6 +34,17 @@
 		<!-- Sidebar details -->
 		<b-sidebar id="sidebar-right" title="Sidebar" right shadow>
 			<div class="px-3 py-2">
+				<b-button
+					v-show="token"
+					pill
+					class="logout-btn"
+					@click="logOut"
+				>
+					<b-icon-power class="ml-1" />
+					<span>
+						خروج از حساب کاربری
+					</span>
+				</b-button>
 				<p>
 					Cras mattis consectetur purus sit amet fermentum. Cras justo
 					odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
@@ -55,14 +66,20 @@ export default {
 	name: 'Navabr',
 	data: () => ({
 		logoImg: require('../assets/images/icons8-microsoft-stream-2019.svg'),
-		token: true,
-		// token: localStorage.token,
+		token: localStorage.token,
 		user: {
-			avatar:
-				'https://static.cdn.asset.aparat.com/profile-photo/6183348-m.jpg',
-			userName: 'cigatech'
+			avatar: '',
+			//'https://static.cdn.asset.aparat.com/profile-photo/6183348-m.jpg',
+			userName: localStorage.name
 		}
-	})
+	}),
+	methods: {
+		logOut() {
+			localStorage.token = ''
+			localStorage.name = ''
+			location.reload()
+		}
+	}
 }
 </script>
 
@@ -125,4 +142,20 @@ $loginBtn-Clr: #fafafa
 			color: $loginBtn-Clr
 			font-weight: 300
 			margin-left: .8em
+	.logout-btn
+		margin: 0px 5px
+		background-color: $navBG
+		color: $loginBtn-Clr
+		border: none
+		height: 33px
+		display: flex
+		align-items: center
+		> span
+			font-size: 12.6px
+			line-height: 32.6px
+		&:hover
+			background-color: $loginBtn-HoverBG
+			color: $loginBtn-HoverClr
+		&:focus
+			box-shadow: none !important
 </style>
