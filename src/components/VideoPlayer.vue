@@ -13,34 +13,41 @@
 
 <script>
 import Hls from 'hls.js'
-// import { liveData } from '../api'
+import axios from 'axios'
 let sourceLive
 
 export default {
 	name: 'VideoPlayer',
-	props: {
-		liveData: {
-			type: Object,
-			required: true
-		}
-	},
-	beforeCreate() {
-		setTimeout(() => {
+	created() {
+		if (this.$route.name == 'Live') {
+			axios
+				.post('http://bstream.guilandev.ir/api/stream/getLive', {
+					page: this.$route.params.username
+				})
+				.then(response => {
+					if (response.data.code == 200) {
+						if (response.data.data.source_live != null) {
+							sourceLive = response.data.data.source_live
+							this.getLiveSource()
+						} else {
+							this.videoPlayerStatus()
+						}
+					}
+				})
+				.catch(error => {
+					console.log(error)
+				})
+		} else {
+			sourceLive = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8'
 			this.getLiveSource()
-		}, 2000)
+		}
 	},
 	methods: {
 		async getLiveSource() {
-			// console.log('1. Start async getLiveSource()')
-			// console.log(this.liveData)
-			await this.getData()
-			// console.log(sourceLive)
+			await this.videoPlayerStatus()
 			await this.hlsSetData()
-			// console.log('6. End async getLiveSource()')
 		},
 		hlsSetData() {
-			// console.log('4. Start await hlsSetData')
-
 			if (Hls.isSupported()) {
 				const video = document.getElementById('video')
 				const hls = new Hls()
@@ -62,12 +69,9 @@ export default {
 					})
 				})
 			}
-			// console.log('5. End await hlsSetData')
 		},
-		getData() {
-			// console.log('2. Start await liveData ')
-			sourceLive = this.liveData.source_live
-			// console.log('3. End await liveData')
+		videoPlayerStatus() {
+			this.$emit('videoPlayerStatus', true)
 		}
 	}
 }

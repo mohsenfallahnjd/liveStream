@@ -57,12 +57,12 @@ $signupBtn-Clr: #000
 			box-shadow: none !important
 	.signupbox-comp
 		width: 400px
-		height: 400px
+		height: 450px
 		margin-bottom: 3em
 	@media only screen and (max-width: 500px)
 		.signupbox-comp
 			width: 340px
-			height: 320px
+			height: 450px
 		.back-btn
 			right: 130px
 </style>

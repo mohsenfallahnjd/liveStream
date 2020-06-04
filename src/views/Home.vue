@@ -1,15 +1,30 @@
 <template>
-	<div id="home" class="home">
-		<div class="navbar-comp"><Navbar /></div>
-		<div class="chatbox-comp"><ChatBox /></div>
-		<div class="videoplayer-comp"><VideoPlayer :liveData="liveData" /></div>
-		<div class="left-side"></div>
-		<div class="streamer-comp"><Streamer :liveData="liveData" /></div>
-	</div>
+	<b-overlay
+		:show="!(showVideoPlayer && showStreamer)"
+		spinner-variant="primary"
+		spinner-type="grow"
+		spinner-small
+		rounded="lg"
+		style="max-width: 100%; height: 100%; z-index:100;"
+	>
+		<div id="home" class="home">
+			<div class="navbar-comp"><Navbar /></div>
+			<div class="chatbox-comp"><ChatBox /></div>
+			<div class="videoplayer-comp">
+				<VideoPlayer @videoPlayerStatus="videoPlayerStatus" />
+			</div>
+			<div class="left-side"></div>
+			<div class="streamer-comp">
+				<Streamer
+					:liveData="liveData"
+					@streamerStatus="streamerStatus"
+				/>
+			</div>
+		</div>
+	</b-overlay>
 </template>
 
 <script>
-import axios from 'axios'
 import Navbar from '@/components/Navbar.vue'
 import ChatBox from '@/components/ChatBox.vue'
 import VideoPlayer from '@/components/VideoPlayer.vue'
@@ -25,26 +40,21 @@ export default {
 	data: () => ({
 		liveData: {
 			current_view: 135,
-			markdown: '# بگوووووووووووووز /:',
+			markdown: '# خوش بومای',
 			source_live: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-			title: 'زولا با بچه های سیگاتک ❤️ قرعه کشی وجه نقد بین فالوئرا ❤️',
+			title: 'سرویس استریم ساخته شده توسط پوریا انوری و محسن فلاح نژاد',
+			//'زولا با بچه های سیگاتک ❤️ قرعه کشی وجه نقد بین فالوئرا ❤️',
 			total_view: 315
-		}
+		},
+		showVideoPlayer: false,
+		showStreamer: false
 	}),
-	beforeCreate() {
-		if (this.$route.name == 'Live') {
-			axios
-				.post('http://bstream.guilandev.ir/api/stream/getLive', {
-					page: this.$route.params.username
-				})
-				.then(response => {
-					if (response.data.code == 200) {
-						this.liveData = response.data.data
-					}
-				})
-				.catch(error => {
-					console.log(error)
-				})
+	methods: {
+		videoPlayerStatus(value) {
+			this.showVideoPlayer = value
+		},
+		streamerStatus(value) {
+			this.showStreamer = value
 		}
 	}
 }
@@ -65,7 +75,7 @@ $gray: #38393D
 		width: 100%
 		position: fixed
 		top: 0
-		z-index: 20
+		z-index: 10
 	.chatbox-comp
 		width: 350px
 		height: calc( 100vh - 65px )

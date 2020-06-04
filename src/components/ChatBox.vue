@@ -51,11 +51,11 @@
 </template>
 
 <script>
-import chatData from '../data.json'
+// import chatData from '../data.json'
 export default {
 	name: 'ChatBox',
 	data: () => ({
-		chatData,
+		chatData: [],
 		token: localStorage.token,
 		chatInput: ''
 	}),

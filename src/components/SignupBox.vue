@@ -15,6 +15,11 @@
 
 			<b-form class="form">
 				<b-form-input
+					class="form__name"
+					v-model="SignupData.name"
+					placeholder="نام"
+				></b-form-input>
+				<b-form-input
 					class="form__username"
 					v-model="SignupData.username"
 					placeholder="نام کاربری"
@@ -43,6 +48,7 @@ export default {
 	name: 'SignupBox',
 	data: () => ({
 		SignupData: {
+			name: '',
 			username: '',
 			email: '',
 			password: ''
@@ -52,7 +58,7 @@ export default {
 		Signup() {
 			axios
 				.post('http://bstream.guilandev.ir/api/user/auth/register', {
-					name: this.SignupData.username,
+					name: this.SignupData.name,
 					username: this.SignupData.username,
 					email: this.SignupData.email,
 					password: this.SignupData.password
@@ -131,7 +137,7 @@ $signup-header: #fafafa
             justify-content: center
             align-items: center
             margin-top: 20px
-            &__username, &__email , &__pass
+            &__name, &__username, &__email , &__pass
                 margin: 10px 0px
                 width: 70%
                 border-radius: 4px

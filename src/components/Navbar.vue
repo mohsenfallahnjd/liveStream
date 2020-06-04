@@ -12,18 +12,20 @@
 			<span class="user__username">
 				{{ user.userName }}
 			</span>
-			<b-avatar
-				class="user__avatar"
-				size="35px"
-				:variant="user.avatar == '' ? 'light' : 'dark'"
-			>
-				<img
-					v-if="user.avatar != ''"
-					class="user__avatar--img"
-					:src="user.avatar"
-					alt="user-avatar"
-				/>
-			</b-avatar>
+			<router-link :to="{ name: 'Profile' }">
+				<b-avatar
+					class="user__avatar"
+					size="35px"
+					:variant="user.avatar == '' ? 'light' : 'dark'"
+				>
+					<img
+						v-if="user.avatar != ''"
+						class="user__avatar--img"
+						:src="user.avatar"
+						alt="user-avatar"
+					/>
+				</b-avatar>
+			</router-link>
 		</span>
 		<b-button v-else pill class="login-btn" :to="{ name: 'Login' }">
 			<b-icon-person class="ml-1" />
@@ -32,8 +34,15 @@
 			</span>
 		</b-button>
 		<!-- Sidebar details -->
-		<b-sidebar id="sidebar-right" title="Sidebar" right shadow>
-			<div class="px-3 py-2">
+		<b-sidebar
+			width="250px"
+			bg-variant="dark"
+			text-variant="light"
+			id="sidebar-right"
+			right
+			shadow
+		>
+			<div class="side-bar px-3 py-2">
 				<b-button
 					v-show="token"
 					pill
@@ -45,16 +54,11 @@
 						خروج از حساب کاربری
 					</span>
 				</b-button>
-				<p>
-					Cras mattis consectetur purus sit amet fermentum. Cras justo
-					odio, dapibus ac facilisis in, egestas eget quam. Morbi leo
-					risus, porta ac consectetur ac, vestibulum at eros.
+				<p v-show="!token">
+					خوش اومدید<br />
+					برای استفاده از امکانات استریم ، چت باکس و ... لطفا وارد
+					شوید
 				</p>
-				<b-img
-					src="https://picsum.photos/500/500/?image=54"
-					fluid
-					thumbnail
-				/>
 			</div>
 		</b-sidebar>
 		<!--  -->
@@ -65,7 +69,7 @@
 export default {
 	name: 'Navabr',
 	data: () => ({
-		logoImg: require('../assets/images/icons8-microsoft-stream-2019.svg'),
+		logoImg: require('../assets/images/icons8-youtube.svg'),
 		token: localStorage.token,
 		user: {
 			avatar: '',
@@ -105,6 +109,8 @@ $loginBtn-Clr: #fafafa
 	.sidebar-btn
 		cursor: pointer
 		color: $loginBtn-Clr
+		&:focus
+			outline: none
 	.login-btn
 		position: absolute
 		margin: 0px 5px
@@ -158,4 +164,6 @@ $loginBtn-Clr: #fafafa
 			color: $loginBtn-HoverClr
 		&:focus
 			box-shadow: none !important
+	.side-bar
+		text-align: right
 </style>
