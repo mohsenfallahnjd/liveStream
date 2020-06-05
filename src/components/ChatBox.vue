@@ -51,7 +51,6 @@
 </template>
 
 <script>
-// import chatData from '../data.json'
 export default {
 	name: 'ChatBox',
 	data: () => ({

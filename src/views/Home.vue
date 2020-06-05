@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Navbar from '@/components/Navbar.vue'
 import ChatBox from '@/components/ChatBox.vue'
 import VideoPlayer from '@/components/VideoPlayer.vue'
@@ -40,15 +41,33 @@ export default {
 	data: () => ({
 		liveData: {
 			current_view: 135,
-			markdown: '# خوش بومای',
+			markdown: '# خوش بومای :)',
 			source_live: 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
-			title: 'سرویس استریم ساخته شده توسط پوریا انوری و محسن فلاح نژاد',
-			//'زولا با بچه های سیگاتک ❤️ قرعه کشی وجه نقد بین فالوئرا ❤️',
+			title: 'به‌به ببین کی اومده...',
 			total_view: 315
 		},
 		showVideoPlayer: false,
 		showStreamer: false
 	}),
+	beforeMount() {
+		if (localStorage.token) {
+			axios
+				.get('http://bstream.guilandev.ir/api/user/stream/profile', {
+					headers: {
+						Authorization: 'Bearer ' + localStorage.token
+					}
+				})
+				.then(response => {
+					if (response.status === 200) {
+						localStorage.profile_pic =
+							response.data.data.profile.profile_pic
+					}
+				})
+				.catch(e => {
+					console.log(e)
+				})
+		}
+	},
 	methods: {
 		videoPlayerStatus(value) {
 			this.showVideoPlayer = value

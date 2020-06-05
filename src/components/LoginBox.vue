@@ -45,7 +45,7 @@ export default {
 	methods: {
 		Login() {
 			axios
-				.post('http://bstream.guilandev.ir/api/user/auth/login', {
+				.post('https://bstream.guilandev.ir/api/user/auth/login', {
 					username: this.loginData.username,
 					password: this.loginData.password
 				})

@@ -63,7 +63,6 @@
 				</div>
 			</div>
 			<div v-html="compiledMarkdown" class="streamer-social">
-				<!-- <textarea :value="input" @input="update"></textarea> -->
 			</div>
 		</div>
 		<!--  -->
@@ -83,10 +82,9 @@ export default {
 	data: () => ({
 		streamer: {
 			avatar: '',
-			// 'https://static.cdn.asset.aparat.com/profile-photo/6183348-m.jpg',
 			userName: '', //'cigatech',
 			folowers: 69,
-			doante_link: 'https://www.google.com'
+			doante_link: 'https://www.coffeeforme.ir'
 		},
 		live: {
 			img:
@@ -103,7 +101,7 @@ export default {
 	created() {
 		if (this.$route.name == 'Live') {
 			axios
-				.post('http://bstream.guilandev.ir/api/stream/getLive', {
+				.post('https://bstream.guilandev.ir/api/stream/getLive', {
 					page: this.$route.params.username
 				})
 				.then(response => {
@@ -114,6 +112,7 @@ export default {
 						this.live.statistics.total =
 							response.data.data.total_view
 						this.input = response.data.data.markdown
+						this.streamer.avatar = response.data.data.profile_pic
 						this.streamer.userName = this.$route.params.username
 						this.streamerStatus()
 					}
@@ -142,11 +141,6 @@ export default {
 			this.$emit('streamerStatus', true)
 		}
 	}
-	// methods: {
-	// 	update: _.debounce(function(e) {
-	// 		this.input = e.target.value
-	// 	}, 300)
-	// },
 }
 </script>
 

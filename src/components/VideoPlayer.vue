@@ -5,7 +5,7 @@
 			class="video-js"
 			controls
 			preload="auto"
-			poster="https://static.cdn.asset.aparat.com/agf/liveCover-86332-326456-l.jpg"
+			:poster="cover"
 			autoplay
 		/>
 	</div>
@@ -18,16 +18,18 @@ let sourceLive
 
 export default {
 	name: 'VideoPlayer',
+	data: () => ({ cover: '' }),
 	created() {
 		if (this.$route.name == 'Live') {
 			axios
-				.post('http://bstream.guilandev.ir/api/stream/getLive', {
+				.post('https://bstream.guilandev.ir/api/stream/getLive', {
 					page: this.$route.params.username
 				})
 				.then(response => {
 					if (response.data.code == 200) {
 						if (response.data.data.source_live != null) {
 							sourceLive = response.data.data.source_live
+							this.cover = response.data.data.cover
 							this.getLiveSource()
 						} else {
 							this.videoPlayerStatus()

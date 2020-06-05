@@ -4,15 +4,18 @@
 			class="sidebar-btn h3 mb-0 ml-3"
 			v-b-toggle.sidebar-right
 		/>
-		<router-link :to="{ name: 'Home' }">
-			<b-img :src="logoImg" alt="navbar-logo" class="navbar__logo" />
-		</router-link>
+		<b-img
+			@click="gotoHome"
+			:src="logoImg"
+			alt="navbar-logo"
+			class="navbar__logo"
+		/>
 
 		<span v-if="token" class="user">
-			<span class="user__username">
-				{{ user.userName }}
-			</span>
 			<router-link :to="{ name: 'Profile' }">
+				<span class="user__username">
+					{{ user.userName }}
+				</span>
 				<b-avatar
 					class="user__avatar"
 					size="35px"
@@ -72,8 +75,7 @@ export default {
 		logoImg: require('../assets/images/icons8-youtube.svg'),
 		token: localStorage.token,
 		user: {
-			avatar: '',
-			//'https://static.cdn.asset.aparat.com/profile-photo/6183348-m.jpg',
+			avatar: localStorage.profile_pic,
 			userName: localStorage.name
 		}
 	}),
@@ -81,6 +83,11 @@ export default {
 		logOut() {
 			localStorage.token = ''
 			localStorage.name = ''
+			localStorage.profile_pic = ''
+			location.reload()
+		},
+		gotoHome() {
+			this.$router.push({ name: 'Home' })
 			location.reload()
 		}
 	}
@@ -140,6 +147,8 @@ $loginBtn-Clr: #fafafa
 		height: 33px
 		display: flex
 		align-items: center
+		> a
+			text-decoration: none
 		&__avatar
 			&--img
 				width: 100% !important

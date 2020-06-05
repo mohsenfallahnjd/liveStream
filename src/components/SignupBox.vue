@@ -57,7 +57,7 @@ export default {
 	methods: {
 		Signup() {
 			axios
-				.post('http://bstream.guilandev.ir/api/user/auth/register', {
+				.post('https://bstream.guilandev.ir/api/user/auth/register', {
 					name: this.SignupData.name,
 					username: this.SignupData.username,
 					email: this.SignupData.email,
