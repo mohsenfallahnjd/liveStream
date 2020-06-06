@@ -29,9 +29,9 @@ export default {
 					if (response.data.code == 200) {
 						if (response.data.data.source_live != null) {
 							sourceLive = response.data.data.source_live
-							this.cover = response.data.data.cover
 							this.getLiveSource()
 						} else {
+							this.cover = response.data.data.cover
 							this.videoPlayerStatus()
 						}
 					}
