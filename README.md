@@ -1,5 +1,10 @@
 # livestream
 
+A simple live streaming platform with vuejs.
+
+you can create account and get a token, then use it on OBS streaming software or like it and try to stream on this platform.
+
+
 ## Project setup
 ```
 yarn install
